@@ -6,6 +6,8 @@ import time
 # Create environment
 env = gym.make("Blackjack-v1", render_mode="human")
 
+total_reward = 0
+
 # Load Q-table
 with open("q_table.pkl", "rb") as f:
     q_values = pickle.load(f)
@@ -46,6 +48,8 @@ for episode in range(5):
 
         obs = next_obs
 
+        total_reward += reward
+
         time.sleep(1)
 
     # Final state
@@ -66,5 +70,7 @@ for episode in range(5):
         print("RESULT: AGENT LOST")
     else:
         print("RESULT: DRAW")
+
+    print(f"total reward; {total_reward}")
 
 env.close()
